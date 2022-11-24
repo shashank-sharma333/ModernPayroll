@@ -1,6 +1,8 @@
 import React, {useEffect, useState} from 'react';
 
 import Web3 from 'web3';
+import axios from "axios";
+
 
 import Payroll from '../build/contracts/Payroll.json';
 
@@ -80,15 +82,48 @@ function EmployerDashboard() {
     const getPaid = async() => {
       await payroll.methods.getPaid().send({from: "0x9fc6d69d2b500a06b87badca008abe8fd93ee147"});
     }
+
+    const getData = async() => {
+      console.log("hello")
+      const user = JSON.parse(localStorage.getItem("currentUser"));
+      console.log("hello", user)
+
+
+      try {
+        console.log("Hii....")
+
+        const result = await (await axios.post('/api/users/getDetailsByEmail',user.email)).data
+        console.log(result.role)
+        if(result.role==='employee')
+        {
+          window.location.href='/employerdashboard'
+        }
+        else{
+          window.location.href='/employeedashboard'
+        }
+        localStorage.setItem('currentUser',JSON.stringify(result))
+        debugger;
+      } catch (error) {
+        console.log(error);
+        
+      }
+
+    }
   
     useEffect(()=>{
       loadWeb3();
       loadBlockchain();
     })
+    
+
+    React.useEffect(() => getData(), [])
+
+
 
     const onAddEmployeeClick = (address, pay) => {
         addEmployee2(address, pay);
     }
+    
 
     const fakeData = {
         0: {

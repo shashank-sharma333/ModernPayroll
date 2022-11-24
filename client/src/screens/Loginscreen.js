@@ -8,6 +8,7 @@ import Success from "../components/Success";
 import Swal from 'sweetalert2'
 import { Button } from "react-bootstrap";
 import { Checkbox } from "antd";
+import { breakpoints } from "@mui/system";
 
 
 export default function Loginscreen() {
@@ -24,6 +25,7 @@ export default function Loginscreen() {
           if(localStorage.getItem('currentUser'))
           {
               window.location.href='/'
+              debugger;
           }
         
     }, [])
@@ -37,8 +39,16 @@ export default function Loginscreen() {
       try {
         setloading(true)
         const result = await (await axios.post('/api/users/login',user)).data
+        console.log(result.role)
+        if(result.role==='employee')
+        {
+          window.location.href='/employerdashboard'
+        }
+        else{
+          window.location.href='/employeedashboard'
+        }
         localStorage.setItem('currentUser',JSON.stringify(result))
-        window.location.href='/'
+        debugger;
       } catch (error) {
         seterror(true)
         setloading(false)

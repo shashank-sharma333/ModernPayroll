@@ -20,11 +20,11 @@ router.post("/register", async(req, res) => {
 
 router.post("/login", async(req, res) => {
 
-    const {email , password} = req.body
+    const {email,password} = req.body
 
     try {
         
-        const user = await User.find({email , password})
+        const user = await User.find({email,password})
 
         if(user.length > 0)
         {
@@ -32,7 +32,39 @@ router.post("/login", async(req, res) => {
                 name : user[0].name , 
                 email : user[0].email, 
                 isAdmin : user[0].isAdmin, 
-                _id : user[0]._id
+                _id : user[0]._id,
+                walletId: user[0].walletId,
+                role:user[0].role
+            }
+            res.send(currentUser);
+        }
+        else{
+            return res.status(400).json({ message: 'User Login Failed' });
+        }
+
+    } catch (error) {
+           return res.status(400).json({ message: 'Something went weong' });
+    }
+  
+});
+
+router.post("/getDetailsByEmail", async(req, res) => {
+
+    const {email} = req.body
+
+    try {
+        
+        const user = await User.find({email})
+
+        if(user.length > 0)
+        {
+            const currentUser = {
+                name : user[0].name , 
+                email : user[0].email, 
+                isAdmin : user[0].isAdmin, 
+                _id : user[0]._id,
+                walletId: user[0].walletId,
+                role:user[0].role
             }
             res.send(currentUser);
         }

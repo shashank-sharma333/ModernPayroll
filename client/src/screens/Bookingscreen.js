@@ -151,11 +151,6 @@ function Bookingscreen({ match }) {
 
             var totalAmount = data.rentperday * totalDays;
             var totalAmountBefore = totalAmount;
-
-           
-           
-
-
            
 
             settotalAmount(totalAmount)
