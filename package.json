@@ -4,6 +4,7 @@
   "description": "",
   "main": "server.js",
   "dependencies": {
+    "@openzeppelin/contracts": "^4.8.0",
     "@sendgrid/mail": "^7.6.2",
     "express": "^4.17.1",
     "moment": "^2.29.1",

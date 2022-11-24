@@ -13,6 +13,8 @@ import Landingscreen from "./screens/Landingscreen";
 import Adminscreen from "./screens/Adminscreen";
 import SelectionScreen from "./screens/SelectionScreen";
 import RegisterFarmerScreen from "./screens/RegisterFarmerScreen";
+import EmployerDashboard from "./screens/EmployerDashboard";
+
 
 import './App.css'
 import RegisterPilotScreen from "./screens/RegisterPilotScreen";
@@ -51,6 +53,8 @@ function App() {
          <Route path="/registerfarmer" component={RegisterFarmerScreen}/>
          <Route path="/selectionscreen" component={SelectionScreen}/>
          <Route path="/registerpilot" component={RegisterPilotScreen}/>
+         <Route path="/employerdashboard" component={EmployerDashboard}/>
+
 
       </BrowserRouter>
     </div>
