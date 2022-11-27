@@ -40,7 +40,7 @@ export default function Loginscreen() {
         setloading(true)
         const result = await (await axios.post('/api/users/login',user)).data
         console.log(result.role)
-        if(result.role==='employee')
+        if(result.role==='employer')
         {
           window.location.href='/employerdashboard'
         }
