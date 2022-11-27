@@ -77,14 +77,14 @@ export default function Registerscreen() {
             Register
           </h2>
           <div>
-            <input required type="text" placeholder="name" className="form-control mt-1" value={name} onChange={(e)=>{setname(e.target.value)}} />
-            <input required type="text" placeholder="Adresss" className="form-control mt-1" value={address} onChange={(e)=>{setaddress(e.target.value)}} />
+            <input required type="text" placeholder="Name" className="form-control mt-1" value={name} onChange={(e)=>{setname(e.target.value)}} />
+            <input required type="text" placeholder="Address" className="form-control mt-1" value={address} onChange={(e)=>{setaddress(e.target.value)}} />
             <input required type="text" placeholder="Role" className="form-control mt-1" value={role} onChange={(e)=>{setrole(e.target.value)}} />
             <input required type="password" placeholder="WalletId" className="form-control mt-1" value={walletId} onChange={(e)=>{setwalletId(e.target.value)}} />
-            <input required type="text" placeholder="email" className="form-control mt-1" value={email} onChange={(e)=>{setemail(e.target.value)}} />
+            <input required type="text" placeholder="Email" className="form-control mt-1" value={email} onChange={(e)=>{setemail(e.target.value)}} />
             <input
               type="password"
-              placeholder="password"
+              placeholder="Password"
               className="form-control mt-1"
               value={password}
               required
@@ -92,7 +92,7 @@ export default function Registerscreen() {
             />
             <input
               type="password"
-              placeholder="confirm password"
+              placeholder="Confirm Password"
               className="form-control mt-1"
               value={cpassword}
               required
