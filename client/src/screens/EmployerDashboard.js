@@ -23,6 +23,9 @@ function EmployerDashboard() {
     const [account, setAccount] = useState('');
     const [payroll, setPayroll] = useState(null);
     const [loading, setLoading] = useState(true);
+    const [unregUsers, setUnregUsers] = useState({});
+    const [walletAddress, setWalletAddress] = useState('');
+    const [newSalary, setNewSalary] = useState('');
   
     const loadBlockchain = async() => {
       web3 = window.web3;
@@ -44,6 +47,15 @@ function EmployerDashboard() {
         window.alert("Payroll not deployed!");
       }
     }
+
+    const inputsHandler = (e) =>{
+      console.log('E', e);
+      if (e.target.name === 'newSalary') {
+        setNewSalary(e.target.value)
+      } else {
+        setWalletAddress(e.target.value)
+      }
+    }
     
     const addMoney = async() => {
       
@@ -57,57 +69,49 @@ function EmployerDashboard() {
       console.log(web3.eth.getBalance(networkData.address));
       // console.log(accounts);
     }
+
+    const addMoney2 = async(amount) => {
+      
+      const web3 = window.web3;
+      const networkId = await web3.eth.net.getId();
+      // const accounts = await web3.eth.getAccounts();
+  
+      networkData = await Payroll.networks[networkId];
+      // console.log(networkData);
+      await web3.eth.sendTransaction({to:networkData.address, from:account, value:web3.utils.toWei(amount, "ether")})
+      console.log(web3.eth.getBalance(networkData.address));
+      // console.log(accounts);
+    }
   
     const addEmployee = async() => {
       await payroll.methods.addEmployee("0x9fc6d69d2b500a06b87badca008abe8fd93ee147", "10").send({from: account});
-      await payroll.methods.checkEmployee(0).call();
+      const x = await payroll.methods.checkEmployee(0).call();
       
       console.log("adding some string: " , await payroll.methods.getNumberOfEmployee().call());
     }
   
     const addEmployee2 = async(address, pay) => {
-      console.log("Address: ", address);
+      console.log("AddressHERERE: ", address);
       console.log("Pay: ", pay);
       await payroll.methods.addEmployee(address, pay).send({from: account});
-      await payroll.methods.checkEmployee(0).call();
-      
+      const x = await payroll.methods.checkEmployee(0).call();
+
+      console.log("checkkkk", x);
       console.log("adding some string: " , await payroll.methods.getNumberOfEmployee().call());
     }
   
     const updateEmployee = async() => {
-      await payroll.methods.updateEmployee("0x9fc6d69d2b500a06b87badca008abe8fd93ee147", "20").send({from: account});
+      await payroll.methods.updateEmployee("0x9ef6506ec2abf21f61eb5c9ca95ac1437d62523d", "20").send({from: account});
+      await payroll.methods.checkEmployee(0).call();
+    }
+
+    const updateEmployee2 = async(walletAddress, newSalary) => {
+      await payroll.methods.updateEmployee(walletAddress, newSalary).send({from: account});
       await payroll.methods.checkEmployee(0).call();
     }
   
     const getPaid = async() => {
       await payroll.methods.getPaid().send({from: "0x9fc6d69d2b500a06b87badca008abe8fd93ee147"});
-    }
-
-    const getData = async() => {
-      console.log("hello")
-      const user = JSON.parse(localStorage.getItem("currentUser"));
-      console.log("hello", user)
-
-
-      try {
-        console.log("Hii....")
-
-        const result = await (await axios.post('/api/users/getDetailsByEmail',user.email)).data
-        console.log(result.role)
-        if(result.role==='employee')
-        {
-          window.location.href='/employerdashboard'
-        }
-        else{
-          window.location.href='/employeedashboard'
-        }
-        localStorage.setItem('currentUser',JSON.stringify(result))
-        debugger;
-      } catch (error) {
-        console.log(error);
-        
-      }
-
     }
   
     useEffect(()=>{
@@ -115,45 +119,89 @@ function EmployerDashboard() {
       loadBlockchain();
     })
     
+    useEffect(() => {
+      // 👇️ this only runs once
+      console.log('useEffect ran');
 
-    React.useEffect(() => getData(), [])
+      async function getData() {
+        console.log("hello")
+        try {
+          console.log("Hii....")
+  
+          const result = await (await axios.post('/api/users/getPayrollUnregisteredUsers',false)).data
+          
+          var index = 0;
+          const salaries = [13,2, 4, 5,6 ,7, 8, 9,10, 11, 12, 1,20, 19, 18];
+          for (var obj in result) {
+            // console.log(`${property}: ${object[property]}`);
+            // console.log(salaries[index], typeof salaries[index])
+            // console.log(result[obj], result)
+            result[obj].salary = salaries[index];
+            if (index === salaries.length - 1) {
+              index = 0;
+            }
+            index++;
+          }
+          setUnregUsers(result);
+        } catch (error) {
+          console.log(error);
+          
+        }
+  
+      }
+  
+      getData();
+    }, []); // 👈️ empty dependencies array
 
-
-
-    const onAddEmployeeClick = (address, pay) => {
+    const onAddEmployeeClick = (address, pay, email) => {
         addEmployee2(address, pay);
+        console.log('hererere', email);
+        axios.put('/api/users/updateUserPayrollStatus',{email:email});
+        alert('User with email ' + email + ' added successfully');
+        window.location.href = window.location.href;
     }
-    
 
-    const fakeData = {
-        0: {
-            Name: 'Abhishek',
-            Address: '0x6ef106deda407410c2d24058d7c869dfb220dc4c',
-            Value: '10',
-        },
-        1: {
-            Name: 'Yashvi',
-            Address: '0x8511dccd5a0fc12f8acdf473bb2d4179c6379062',
-            Value: '20',
-        },
-        2: {
-            Name: 'Shashank',
-            Address: '0xf5c3a0a413a1c0a6141d1d49a2f18729487c078e',
-            Value: '30',
-        },
-    };
+    const onUpdateEmployeeClick = (walletAddress, newSalary) => {
+      // console.log('inputFiled', inputField);
+      console.log('inputs', typeof walletAddress, typeof newSalary);
+      // updateEmployee2(walletAddress, newSalary);
+      updateEmployee();
+
+      // console.log('hererere', email);
+      // axios.put('/api/users/updateUserPayrollStatus',{email:email});
+      // alert('User with email ' + email + ' added successfully');
+      // window.location.href = window.location.href;
+    }
+
+    const onAddMoneyClick = (amount) => {
+      addMoney2(amount);
+      // console.log('hererere', email);
+      // axios.put('/api/users/updateUserPayrollStatus',{email:email});
+      // alert('User with email ' + email + ' added successfully');
+      // window.location.href = window.location.href;
+    }
+
+    const onGetPaidClick = () => {
+      getPaid();
+      // console.log('hererere', email);
+      // axios.put('/api/users/updateUserPayrollStatus',{email:email});
+      // alert('User with email ' + email + ' added successfully');
+      // window.location.href = window.location.href;
+    }
     
     return (
     <React.Fragment>
         <div>
-            {Object.keys(fakeData).map((key, index) => {
-                const address = fakeData[key].Address;
-                const value = fakeData[key].Value;
-                const name = fakeData[key].Name;
+            {Object.keys(unregUsers).map((key, index) => {
+                const userData = unregUsers[key];
+                const walletId = userData.walletId;
+                const value = userData.salary;                ;
+                const name = userData.name;
+                const email = userData.email;
                 return (
                     <div key={index}>
                         <div className='add-employee-line'>
-                            <button onClick = {() => onAddEmployeeClick(address, value)}>
+                            <button onClick = {() => onAddEmployeeClick(walletId, value, email)}>
                                 Add Employee {name}
                             </button>
                         </div>
@@ -165,6 +213,33 @@ function EmployerDashboard() {
                     </div>
                 );
             })}
+        </div>
+        <div>
+            <input 
+            type="text" 
+            name="walletAddress" 
+            onChange={inputsHandler} 
+            placeholder="1234" 
+            value={walletAddress}/>
+
+            <br/>
+
+            <input 
+            type="text" 
+            name="newSalary" 
+            onChange={inputsHandler} 
+            placeholder="1234" 
+            value={newSalary}/>
+
+            <br/>
+
+            <button onClick={() => onUpdateEmployeeClick(walletAddress, newSalary)}>Update Salary</button>
+        </div>
+        <div>
+          
+        </div>
+        <div>
+          
         </div>
     </React.Fragment>
 

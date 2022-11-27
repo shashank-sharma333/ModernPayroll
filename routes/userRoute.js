@@ -134,6 +134,18 @@ router.put("/reducereward", async(req, res) => {
   
 });
 
+router.put("/updateUserPayrollStatus", async(req, res) => {
+    console.log(req, res);
+    const {email} = req.body;
+    try {
+        const user = await User.findOneAndUpdate({email:email},{$set:{isPayrollRegistered: true}});
+        res.send("successful");
+    } catch (error) {
+        return res.status(400).json({ message: error });
+    }
+  
+});
+
 router.post("/deleteuser", async(req, res) => {
   
     const userid = req.body.userid
@@ -147,6 +159,14 @@ router.post("/deleteuser", async(req, res) => {
 
 });
 
-
+router.post("/getPayrollUnregisteredUsers", async (req, res) => {
+    const { isPayrollRegistered } = req.body;
+    try {
+      const bookings = await User.find({ isPayrollRegistered: false });
+      res.send(bookings);
+    } catch (error) {
+      return res.status(400).json({ message: "Something went wrong" });
+    }
+  });
 
 module.exports = router
