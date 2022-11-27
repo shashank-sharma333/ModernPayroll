@@ -14,6 +14,7 @@ import Adminscreen from "./screens/Adminscreen";
 import SelectionScreen from "./screens/SelectionScreen";
 import RegisterFarmerScreen from "./screens/RegisterFarmerScreen";
 import EmployerDashboard from "./screens/EmployerDashboard";
+import EmployeeDashboard from "./screens/EmployeeDashboard";
 
 
 import './App.css'
@@ -54,6 +55,7 @@ function App() {
          <Route path="/selectionscreen" component={SelectionScreen}/>
          <Route path="/registerpilot" component={RegisterPilotScreen}/>
          <Route path="/employerdashboard" component={EmployerDashboard}/>
+         <Route path="/employeedashboard" component={EmployeeDashboard}/>
 
 
       </BrowserRouter>
