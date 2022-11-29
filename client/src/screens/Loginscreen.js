@@ -25,7 +25,8 @@ export default function Loginscreen() {
 
   }, [])
 
-  async function login() {
+  async function login(e) {
+    e.preventDefault();
     const user = {
 
       email,
