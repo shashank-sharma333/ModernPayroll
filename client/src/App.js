@@ -2,7 +2,7 @@ import logo from "./logo.svg";
 import "./App.css";
 import {BrowserRouter, Route , path} from 'react-router-dom'
 import Homescreen from "./screens/Homescreen";
-import Navbar from "./components/Navbar";
+import NavbarBetter from "./components/Navbar";
 import Loginscreen from "./screens/Loginscreen";
 import Registerscreen from "./screens/Registerscreen";
 import 'antd/dist/antd.css';
@@ -40,7 +40,7 @@ function App() {
 
     
     <div className="App">
-      <Navbar />
+      <NavbarBetter />
       <BrowserRouter>
       
          <Route path="/" exact component={Landingscreen}/>

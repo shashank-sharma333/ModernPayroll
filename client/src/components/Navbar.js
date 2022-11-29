@@ -1,93 +1,64 @@
+import Container from 'react-bootstrap/Container';
+import Nav from 'react-bootstrap/Nav';
+import Navbar from 'react-bootstrap/Navbar';
+import NavDropdown from 'react-bootstrap/NavDropdown';
 import React from "react";
 import {useEffect,useState} from 'react';
 import axios from 'axios';
-function Navbar() {
 
-  function logout() {
-    localStorage.removeItem('currentUser')
-    window.location.href='/login'
-  }
+function NavbarBetter() {
 
-  const [location, setlocation] = useState([]);
-    
-    useEffect(() => {
-      async function fetchData() {
-        var retrievedData = JSON.parse(localStorage.getItem('currentUser'));
-        console.log(retrievedData.email)
-        const req = await axios.post('/api/users/rewards',{email:retrievedData.email});
-        var reqdata = req.data;
-        console.log(reqdata[0].location);
-        setlocation(reqdata[0].location);
-       
+    function logout() {
+        localStorage.removeItem('currentUser')
+        window.location.href='/login'
       }
-
-      fetchData();
-    }, [])
+    
+      const [location, setlocation] = useState([]);
+        
+        useEffect(() => {
+          async function fetchData() {
+            var retrievedData = JSON.parse(localStorage.getItem('currentUser'));
+            console.log(retrievedData.email)
+            const req = await axios.post('/api/users/rewards',{email:retrievedData.email});
+            var reqdata = req.data;
+            console.log(reqdata[0].location);
+            setlocation(reqdata[0].location);
+           
+          }
+    
+          fetchData();
+        }, [])
 
   return (
-    <div>
-      <nav className="navbar navbar-expand-lg">
-        <a className="navbar-brand" href="/">
-          ModernPayroll
-        </a>
+    <Navbar bg="primary" className='pr-4' variant="dark"  expand="lg">
       
-        <a className="navbar-brand" href="../HelpScreen">
-          About
-        </a>
-        
-        <button
-          className="navbar-toggler"
-          type="button"
-          data-toggle="collapse"
-          data-target="#navbarNav"
-          aria-controls="navbarNav"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span className="navbar-toggler-icon"><i className='fa fa-bars' style={{color: 'white'}}></i></span>
-        </button>
-        <div className="collapse navbar-collapse " id="navbarNav">
+        <Navbar.Brand href="/">Modern Payroll</Navbar.Brand>
+        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        <Navbar.Collapse id="basic-navbar-nav" className="d-flex justify-content-between">
+          <Nav>
+            <Nav.Link href="../HelpScreen">About</Nav.Link>       
+            </Nav>
+            <Nav className='mr-5'>
+            {/* <Nav.Link href="#link">Link</Nav.Link> */}
+            {localStorage.getItem('currentUser') ? (
 
-         
-
-
-          <ul className="navbar-nav ml-auto">
-
-          {localStorage.getItem('currentUser') ? (
-            <div className="dropdown mr-5">
-            <button className="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <i className="fa fa-user" aria-hidden="true"></i>  {JSON.parse(localStorage.getItem('currentUser')).name} 
-            </button>
-            <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
-              <a className="dropdown-item" href="/profile">Profile</a>
-              <a className="dropdown-item" href="#" onClick={logout}>Logout</a>
-              </div>
-          </div>
-          
-
-
-
-          ) : (
-            <>
-            <li className="nav-item active">
-              <a className="nav-link" href="/register">
-                Register
-              </a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link" href="/login">
-                Login
-              </a>
-            </li>
-            
-            </>
+            <NavDropdown className="justify-content-end" title={JSON.parse(localStorage.getItem('currentUser')).name} id="basic-nav-dropdown">
+              <NavDropdown.Item  href="/profile">Profile</NavDropdown.Item>
+              <NavDropdown.Item href="#" onClick={logout}>
+                Logout
+              </NavDropdown.Item>
+            </NavDropdown>) : (
+                    <React.Fragment>
+            <Nav.Link className="justify-content-end" href="/register">Register</Nav.Link>
+            <Nav.Link className="justify-content-end" href="/login">Login</Nav.Link>
+            </React.Fragment>
             )}
-           
-          </ul>
-        </div>
-      </nav>
-    </div>
+
+          </Nav>
+        </Navbar.Collapse>
+      
+    </Navbar>
   );
 }
 
-export default Navbar;
+export default NavbarBetter;

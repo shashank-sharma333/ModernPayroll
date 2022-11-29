@@ -1,104 +1,94 @@
 import React, { useState, useEffect } from "react";
 
-import {useDispatch , useSelector} from 'react-redux'
 import axios from "axios";
 import Error from "../components/Error";
 import Loader from "../components/Loader";
 import Success from "../components/Success";
-import Swal from 'sweetalert2'
-import { Button } from "react-bootstrap";
-import { Checkbox } from "antd";
-import { breakpoints } from "@mui/system";
 
+import {Button, Form, Container} from 'react-bootstrap';
 
 export default function Loginscreen() {
-  
 
-    const [email, setemail] = useState("");
-    const [password, setpassword] = useState("");
-    const[loading, setloading]=useState(false)
-    const[error, seterror]=useState(false)
-    const[success, setsuccess]=useState(false)    
 
-    useEffect(() => {
+  const [email, setemail] = useState("");
+  const [password, setpassword] = useState("");
+  const [loading, setloading] = useState(false)
+  const [error, seterror] = useState(false)
+  const [success, setsuccess] = useState(false)
 
-          if(localStorage.getItem('currentUser'))
-          {
-              window.location.href='/'
-              debugger;
-          }
-        
-    }, [])
+  useEffect(() => {
 
-    async function login(){
-      const user={
-     
-        email,
-        password
+    if (localStorage.getItem('currentUser')) {
+      window.location.href = '/'
+      debugger;
     }
-      try {
-        setloading(true)
-        const result = await (await axios.post('/api/users/login',user)).data
-        console.log(result.role)
-        if(result.role==='employer')
-        {
-          window.location.href='/employerdashboard'
-        }
-        else{
-          window.location.href='/employeedashboard'
-        }
-        localStorage.setItem('currentUser',JSON.stringify(result))
-        debugger;
-      } catch (error) {
-        seterror(true)
-        setloading(false)
-        console.log(error);
-        
+
+  }, [])
+
+  async function login() {
+    const user = {
+
+      email,
+      password
+    }
+    try {
+      setloading(true)
+      const result = await (await axios.post('/api/users/login', user)).data
+      console.log(result.role)
+      if (result.role === 'employer') {
+        window.location.href = '/employerdashboard'
       }
+      else {
+        window.location.href = '/employeedashboard'
+      }
+      localStorage.setItem('currentUser', JSON.stringify(result))
+      debugger;
+    } catch (error) {
+      seterror(true)
+      setloading(false)
+      console.log(error);
+
     }
+  }
 
-    return (
+  return (
 
-      <>
-      
-      <div className='login'>
-          <div className="row justify-content-center mt-5">
-            <div className="col-md-5 mt-5 text-left shadow-lg p-3 mb-5 bg-white rounded">
-              <h2 className="text-center m-2" style={{ fontSize: "35px" }}>
-                Login
-              </h2>
+    <Container className="d-flex justify-content-around" style={{ width:"100vw",height:"100vh"}}>
+      <div className="card p-4 m-5" style={{boxShadow:"0px 0px 15px -8px black", borderRadius:"10px", width:"500px", height:"370px"}}>
+      <Form>
+      <Form.Text>
+        <h1>Log In</h1>
+        <hr />
+        </Form.Text>
+        <Form.Text>
+          {loading && (<Loader />)}
+          {error && (<Error error='Invalid Credentials' />)}
+          {success && (<Success success='User Login Successfull' />)}
+        </Form.Text>
+        <Form.Group className="mb-3" controlId="formBasicEmail">
+          <Form.Label>Email address</Form.Label>
+          <Form.Control type="email" placeholder="abc@gmail.com" value={email} onChange={(e) => { setemail(e.target.value); }} />
 
-              {loading && (<Loader />)}
-              {error && (<Error error='Invalid Credentials' />)}
-              {success && (<Success success='User Login Successfull' />)}
-              <div>
-                <input required type="text" placeholder="email" className="form-control mt-1" value={email} onChange={(e) => { setemail(e.target.value); } } />
-                <input
-                  type="password"
-                  placeholder="password"
-                  className="form-control mt-1"
-                  value={password}
-                  required
-                  onChange={(e) => { setpassword(e.target.value); } } />
+        </Form.Group>
 
-                <div class="row justify-content-center">
-                <button onClick={login} className="btn btn-success mt-3 mb-3 rounded-pill ">LOGIN</button>
-                </div>
-                <a style={{ color: 'black' }} href="/register" className="mt-2">Click Here To Register</a> &nbsp;
-                &nbsp;
-                <br />
-                &ensp;
-               
-                
-            </div>
-            </div>
-          </div> 
-        </div></>
+        <Form.Group className="mb-3" controlId="formBasicPassword">
+          <Form.Label>Password</Form.Label>
+          <Form.Control type="password" placeholder="Password" value={password}
+            required
+            onChange={(e) => { setpassword(e.target.value); }} />
+        </Form.Group>        
+        <Button variant="primary" type="submit" onClick={login} >
+          Login
+        </Button>
+        <a href="/register" className="ml-2">Click Here To Register</a>
+      </Form>
+      </div>
+    </Container>
 
-    
-    )
+
+  )
 }
 
 
-     
-    
+
+

@@ -7,6 +7,7 @@ body , html{
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-family: 'Montserrat', sans-serif !important;
+  background-color: white;
 }
 html{
   overflow-x: hidden;
@@ -19,23 +20,6 @@ img{
 h1{
   font-size: 20px !important;
 }
-.navbar{
-  background-color:rgb(18, 224, 224) !important;
-  border-radius: 0px !important;
-  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-}
-.nav-link{
-  color: black !important;
-
-}
-.navbar-brand{
-  color: black !important;
-}
-.btn{
-  box-shadow: none !important;
-  padding-left: 20px !important;
-  padding-right: 20px !important;
-}
 .modal-body{
   height: 450px !important;
   overflow-y: auto;
@@ -46,18 +30,11 @@ input , .ant-picker {
   width: 100% !important;
   border-radius: 3px !important;
 }
-.dropdown-toggle{
-  background-color: black !important;
-  border: 0px solid black !important;
-  color:white !important;
-}
+
 .i2{
   margin: 0 !important;
 }
-select{
-  box-shadow: none !important;
-  border: 2px solid black !important;
-}
+
 p{
   font-size: 16px !important;
 }
@@ -67,10 +44,10 @@ p{
   color: red;
 }
 
-.btn{
+/* .btn{
   background-color:black !important;
   border-color: black !important;
-}
+} */
 
 .bs{
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
@@ -91,19 +68,13 @@ p{
   height:calc(100vh) !important;
   background-image: url(./images/PayrollImage.jpeg);
   background-size: cover;
-  /*height: 150vh;*/
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
 
   font-size:50px;
-  /*background-repeat:no-repeat;*/
   background-color:rgb(0, 0, 0) !important;
 }
 
-.landing .btn{
-  background-color:white !important;
-  color:black !important;
-  margin-top: 10px !important;
-}
+
 
