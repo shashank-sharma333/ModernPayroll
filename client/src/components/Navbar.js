@@ -30,7 +30,7 @@ function NavbarBetter() {
         }, [])
 
   return (
-    <Navbar bg="primary" className='pr-4' variant="dark"  expand="lg">
+    <Navbar bg="primary" className='pr-4 noPrint' variant="dark"  expand="lg">
       
         <Navbar.Brand href="/">Modern Payroll</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
