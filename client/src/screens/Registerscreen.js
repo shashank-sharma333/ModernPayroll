@@ -4,7 +4,7 @@ import axios from "axios";
 import './screen.css';
 import Error from "../components/Error";
 import Loader from "../components/Loader";
-import { Button } from "react-bootstrap";
+import { Button , Container, Form} from "react-bootstrap";
 import { Checkbox } from "antd";
 import {Routes, Route, useHistory} from "react-router-dom";
 import Success from '../components/Success'
@@ -65,7 +65,7 @@ export default function Registerscreen() {
   }
 
   return (
-    <div className='register'>
+    <div className="register">
       <div className="row justify-content-center mt-5">
         <div className="col-md-5 mt-5 text-left shadow-lg p-3 mb-5 bg-white rounded">
 
@@ -77,37 +77,56 @@ export default function Registerscreen() {
             Register
           </h2>
           <div>
-            <input required type="text" placeholder="Name" className="form-control mt-1" value={name} onChange={(e)=>{setname(e.target.value)}} />
-            <input required type="text" placeholder="Address" className="form-control mt-1" value={address} onChange={(e)=>{setaddress(e.target.value)}} />
-            <input required type="text" placeholder="Role" className="form-control mt-1" value={role} onChange={(e)=>{setrole(e.target.value)}} />
-            <input required type="password" placeholder="WalletId" className="form-control mt-1" value={walletId} onChange={(e)=>{setwalletId(e.target.value)}} />
-            <input required type="text" placeholder="Email" className="form-control mt-1" value={email} onChange={(e)=>{setemail(e.target.value)}} />
-            <input
-              type="password"
-              placeholder="Password"
-              className="form-control mt-1"
-              value={password}
-              required
-              onChange={(e)=>{setpassword(e.target.value)}}
-            />
-            <input
-              type="password"
-              placeholder="Confirm Password"
-              className="form-control mt-1"
-              value={cpassword}
-              required
-              onChange={(e)=>{setcpassword(e.target.value)}}
-            />
+            <Form>
+            <Form.Group className="mb-2">
+              <Form.Label>Full Name</Form.Label>
+              <Form.Control required type="text" placeholder="Jane Doe" className="form-control" value={name} onChange={(e)=>{setname(e.target.value)}} />
+            </Form.Group>
+            <Form.Group className="mb-2">
+              <Form.Label>Address</Form.Label>
+              <Form.Control required type="text" placeholder="San Fernando" className="form-control " value={address} onChange={(e)=>{setaddress(e.target.value)}} />
+            </Form.Group>
+            <Form.Group className="mb-2">
+              <Form.Label>Role</Form.Label>
+              <Form.Control required type="text" placeholder="Employee" className="form-control " value={role} onChange={(e)=>{setrole(e.target.value)}} />
+            </Form.Group>
+            <Form.Group className="mb-2">
+              <Form.Label>WalletId</Form.Label>
+              <Form.Control required type="password" placeholder="00axbccjd777987263" className="form-control" value={walletId} onChange={(e)=>{setwalletId(e.target.value)}} />
+            </Form.Group>
+            <Form.Group className="mb-2" controlId="formBasicEmail">
+              <Form.Label>Email address</Form.Label>
+              <Form.Control required type="text" placeholder="abc@gmail.com" className="form-control " value={email} onChange={(e)=>{setemail(e.target.value)}} />
+             </Form.Group> 
+            <Form.Group className="mb-2" controlId="formBasicPassword">
+              <Form.Label>Password</Form.Label>
+              <Form.Control
+                type="password"
+                placeholder="Password"
+                className="form-control"
+                value={password}
+                required
+                onChange={(e)=>{setpassword(e.target.value)}}
+              />
+            </Form.Group>
+            <Form.Group className="mb-2" controlId="formBasicPassword">
+              <Form.Label>Password</Form.Label>
+              <Form.Control
+                type="password"
+                placeholder="Confirm Password"
+                className="form-control "
+                value={cpassword}
+                required
+                onChange={(e)=>{setcpassword(e.target.value)}}
+              />
+            </Form.Group>
               {/* <div class="rewards">
   <input type="checkbox" id="rewards" name="rewards"/>
   <label for="rewards">Opt in for Rewards</label>
 </div> */}
-            <button onClick={register} className="btn btn-primary rounded-pill mt-3 mb-3">REGISTER</button>
-            <br/>
-            <a style={{color:'black'}} href="/login">Click Here To Login</a>  &ensp;  &ensp;
-
-            
-            
+            <Button onClick={register} variant="primary">REGISTER</Button>
+            <a className="ml-2" style={{color:'black'}} href="/login">Click Here To Login</a>  &ensp;  &ensp;
+            </Form>
           </div>
         </div>
       </div>
