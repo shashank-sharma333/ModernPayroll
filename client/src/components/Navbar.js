@@ -38,6 +38,7 @@ function NavbarBetter() {
           <Nav>
             <Nav.Link style = {{fontSize: "20px"}}  href="../HelpScreen">About</Nav.Link>       
             </Nav>
+
             <Nav className='mr-5'>
             {/* <Nav.Link href="#link">Link</Nav.Link> */}
             {localStorage.getItem('currentUser') ? (

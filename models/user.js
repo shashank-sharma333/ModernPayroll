@@ -6,7 +6,8 @@ const userSchema = mongoose.Schema({
     password : {type: String , require},
     role : {type: String , require},
     walletId : {type: String , require},
-    isPayrollRegistered : {type: Boolean , require , default: false}
+    isPayrollRegistered : {type: Boolean , require , default: false},
+    salary : {type: String , require , default: '0'}
 } , {
     timestamps : true
 })

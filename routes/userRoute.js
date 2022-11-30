@@ -146,6 +146,18 @@ router.put("/updateUserPayrollStatus", async(req, res) => {
   
 });
 
+router.put("/updateUserSalary", async(req, res) => {
+    console.log(req, res);
+    const {email, newSalary} = req.body;
+    try {
+        const user = await User.findOneAndUpdate({email:email},{$set:{salary: newSalary}});
+        res.send("successful");
+    } catch (error) {
+        return res.status(400).json({ message: error });
+    }
+  
+});
+
 router.post("/deleteuser", async(req, res) => {
   
     const userid = req.body.userid
