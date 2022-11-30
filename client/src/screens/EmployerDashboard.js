@@ -189,7 +189,12 @@ function EmployerDashboard() {
     // window.location.href = window.location.href;
   }
 
-  const onAddMoneyClick = (amount) => {
+  const onAddMoneyClick = (e, uID) => {
+    e.preventDefault();
+    let amount = document.getElementById(uID).value;
+    if (amount === '') {
+      amount = '0';
+    }
     addMoney2(amount);
     // console.log('hererere', email);
     // axios.put('/api/users/updateUserPayrollStatus',{email:email});
@@ -220,8 +225,10 @@ function EmployerDashboard() {
         </thead>
 
         <tbody>
-          {users && (users.map(user => {
-            const salary = 10; // Math.floor(Math.random() * 21);
+          {users && (users.map((user, index) => {
+            const salaries = [3, 4, 12, 20, 8, 12, 10, 17, 15, 9, 8, 16, 20, 7, 5];
+            const salary = salaries[index % salaries.length];
+            index++;
             return <tr>
               <td>{user._id}</td>
               <td>{user.name}</td>
@@ -248,12 +255,12 @@ function EmployerDashboard() {
                 {user.isPayrollRegistered ?
                   <form className='d-flex justify-content-around'>
                     <div className="form-group" >
-                      <input type="text"className="form-control-sm" style={{height:"30px", fontSize:"12px"}} onChange={inputsHandler} id="exampleFormControlInput1" value={addSalary} placeholder="Add Salary" />
+                      <input type="text" id={user._id} className="form-control-sm" style={{height:"30px", fontSize:"12px"}} placeholder="Add Salary" />
                     </div>
-                    <button type="submit" className="btn btn-primary float-right" style={{height:"30px", fontSize:"12px"}} onClick={() => onAddMoneyClick(addSalary)}>Add</button>
+                    <button type="submit" id={"btn_" + user._id} className="btn btn-primary float-right" style={{height:"30px", fontSize:"12px"}} onClick={(event) => onAddMoneyClick(event, user._id)}>Add</button>
                   </form>
 
-                  : <div>User is not</div>
+                  : <div>User is not registered</div>
                 }
               </td>
 

@@ -30,7 +30,7 @@ function bg() {
   // I changed your array to the literal notation. The literal notation is preferred.
   var images = ['001.png', '002.png', '003.png'];
   // I changed this section to just define the style attribute the best way I know how.
-  document.getElementById('banner').setAttribute("style", "background-image: url(" + dir + images[randomCount] + ");background-repeat: no-repeat;background-size: 388px 388px");
+  // document.getElementById('banner').setAttribute("style", "background-image: url(" + dir + images[randomCount] + ");background-repeat: no-repeat;background-size: 388px 388px");
 }
 // Don't forget to run the function instead of just defining it.
 bg();

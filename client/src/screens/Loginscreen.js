@@ -20,7 +20,6 @@ export default function Loginscreen() {
 
     if (localStorage.getItem('currentUser')) {
       window.location.href = '/'
-      debugger;
     }
 
   }, [])
@@ -43,7 +42,6 @@ export default function Loginscreen() {
         window.location.href = '/employeedashboard'
       }
       localStorage.setItem('currentUser', JSON.stringify(result))
-      debugger;
     } catch (error) {
       seterror(true)
       setloading(false)
