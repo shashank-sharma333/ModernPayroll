@@ -88,52 +88,6 @@ function EmployeeDashboard() {
     
     const[balance_2 , setBalance] = useState(0)
     
-
-    
-    const exportPDF = () => {
-        const unit = "pt";
-        const size = "A4"; // Use A1, A2, A3 or A4
-        const orientation = "portrait"; // portrait or landscape
-
-        const marginLeft = 40;
-        const doc = new jsPDF(orientation, unit, size);
-
-        doc.setFontSize(15);
-
-        const title = "PAY SLIP";
-        const headers = [["Earnings", "Hours", "Currency", "Rate", "Current", "YTD"]];
-
-        //const data = this.state.people.map(elt=> [elt.name, elt.profession]);
-        const data = [["Standard Pay", "112", "USD", "6.8561466954675385", "767.8884298923643", "767.8884298923643"],
-                      ["Overtime Pay", "4", "USD", "63.99070249103037", "255.96280996412148", "255.96280996412148"],
-                      ["Holiday Pay","4","USD","127.98140498206074","511.92561992824295","511.92561992824295"],
-                      ["Basic pay", "32", "USD", "27.995932339825785","895.8698348744251","895.8698348744251"],
-                      ["Commision and Bonus", "8", "USD", "15.997675622757592", "127.98140498206074", "127.98140498206074"],
-                      ["Gross Pay", "-", "USD", "-", "2559.6280996412147", "2559.6280996412147"]];
-        let content = {
-        startY: 50,
-        head: headers,
-        body: data
-        };
-
-        doc.text(title, marginLeft, 40);
-        doc.autoTable(content);
-        doc.save("report.pdf")
-    }
-
-    
-    // async function getPaid(){
-    //   const balance_before = await web3.eth.getBalance(user.walletId)
-    //   // localStorage.setItem('currentUser',JSON.stringify(balance_before))
-    //   console.log(balance_before);
-    //   // setOldBal(balance_before);
-    //   console.log(user.walletId);
-    //   window.location.reload(false);
-    //   await payroll.methods.getPaid().send({from: user.walletId});
-    //   const balance_after = await web3.eth.getBalance(user.walletId);
-    //   console.log(balance_after);
-  
-    // }
     const sal = balance_2;
     const [finSalary, setNewSal] = useState(0);
     const [curr, setNewCurr] = useState('');
@@ -242,8 +196,8 @@ function EmployeeDashboard() {
           </div>
         </div>
       </Container>
-      <Container className='mt-3'>
-        <button className="btn btn-primary float-left" style={{height:"38px", fontSize:"12px"}} onClick={() => exportPDF()}>Download Pay Slip</button>
+      <Container className='mt-3 noPrint'>
+        <button className="btn btn-primary float-left" style={{height:"38px", fontSize:"12px"}} onClick={() => window.print()}>Download Pay Slip</button>
         <button className="btn btn-primary float-right" style={{height:"38px", fontSize:"12px"}} onClick={() => onGetPaid()}>Get Salary</button>
       </Container>
      </div>
