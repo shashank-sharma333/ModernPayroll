@@ -6,8 +6,6 @@ import Web3 from 'web3';
 import Payroll from '../build/contracts/Payroll.json';
 import axios from 'axios';
 import Loader from "../components/Loader";
-import jsPDF from "jspdf";
-import "jspdf-autotable";
 import { Table, Container, Col, Row } from 'react-bootstrap';
 
 
