@@ -101,14 +101,19 @@ function EmployeeDashboard() {
         doc.setFontSize(15);
 
         const title = "PAY SLIP";
-        const headers = [["Standard Pay", "Overtime Pay", "Holiday Pay", "Basic Pay", "Commision & Bonus", "Gross Pay"]];
+        const headers = [["Earnings", "Hours", "Currency", "Rate", "Current", "YTD"]];
 
-        // const data = this.state.people.map(elt=> [elt.name, elt.profession]);
-
+        //const data = this.state.people.map(elt=> [elt.name, elt.profession]);
+        const data = [["Standard Pay", "112", "USD", "6.8561466954675385", "767.8884298923643", "767.8884298923643"],
+                      ["Overtime Pay", "4", "USD", "63.99070249103037", "255.96280996412148", "255.96280996412148"],
+                      ["Holiday Pay","4","USD","127.98140498206074","511.92561992824295","511.92561992824295"],
+                      ["Basic pay", "32", "USD", "27.995932339825785","895.8698348744251","895.8698348744251"],
+                      ["Commision and Bonus", "8", "USD", "15.997675622757592", "127.98140498206074", "127.98140498206074"],
+                      ["Gross Pay", "-", "USD", "-", "2559.6280996412147", "2559.6280996412147"]];
         let content = {
         startY: 50,
         head: headers,
-        // body: data
+        body: data
         };
 
         doc.text(title, marginLeft, 40);
