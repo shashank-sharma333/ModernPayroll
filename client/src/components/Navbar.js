@@ -36,13 +36,13 @@ function NavbarBetter() {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav" className="d-flex justify-content-between">
           <Nav>
-            <Nav.Link href="../HelpScreen">About</Nav.Link>       
+            <Nav.Link style = {{fontSize: "20px"}}  href="../HelpScreen">About</Nav.Link>       
             </Nav>
             <Nav className='mr-5'>
             {/* <Nav.Link href="#link">Link</Nav.Link> */}
             {localStorage.getItem('currentUser') ? (
 
-            <NavDropdown className="justify-content-end" title={JSON.parse(localStorage.getItem('currentUser')).name} id="basic-nav-dropdown">
+            <NavDropdown className="justify-content-end" style = {{fontSize: "20px"}} title={JSON.parse(localStorage.getItem('currentUser')).name} id="basic-nav-dropdown">
               <NavDropdown.Item  href="/profile">Profile</NavDropdown.Item>
               <NavDropdown.Item href="#" onClick={logout}>
                 Logout
