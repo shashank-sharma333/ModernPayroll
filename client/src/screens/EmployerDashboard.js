@@ -168,7 +168,7 @@ function EmployerDashboard() {
   const onAddEmployeeClick = (address, pay, email) => {
     addEmployee2(address, pay);
     console.log('hererere', email);
-    axios.put('/api/users/updateUserPayrollStatus', { email: email });
+    // axios.put('/api/users/updateUserPayrollStatus', { email: email });
     alert('User with email ' + email + ' added successfully');
     // window.location.href = window.location.href;
   }
