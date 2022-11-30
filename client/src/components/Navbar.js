@@ -49,8 +49,8 @@ function NavbarBetter() {
               </NavDropdown.Item>
             </NavDropdown>) : (
                     <React.Fragment>
-            <Nav.Link className="justify-content-end" href="/register">Register</Nav.Link>
-            <Nav.Link className="justify-content-end" href="/login">Login</Nav.Link>
+            <Nav.Link className="justify-content-end" style = {{fontSize: "20px"}} href="/register">Register</Nav.Link>
+            <Nav.Link className="justify-content-end" style = {{fontSize: "20px"}} href="/login">Login</Nav.Link>
             </React.Fragment>
             )}
 
