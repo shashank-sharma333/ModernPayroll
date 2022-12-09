@@ -63,7 +63,7 @@ function EmployeeDashboard() {
       })
     var balance_before =0, balance_after=0;
 
-
+    
     const getPaid = async() => {
       balance_before = await web3.utils.fromWei(await web3.eth.getBalance(user.walletId), "ether");
       // localStorage.setItem('currentUser',JSON.stringify(balance_before))
@@ -84,7 +84,7 @@ function EmployeeDashboard() {
         getPaid();
     }
     
-    const[balance_2 , setBalance] = useState(0)
+    const[balance_2 , setBalance] = useState(0) 
     
     const sal = balance_2;
     const [finSalary, setNewSal] = useState(0);
@@ -110,8 +110,18 @@ function EmployeeDashboard() {
         setNewCurr('GBP');
       }
     }
-    const salary = finSalary;
+    const salary = Number(finSalary).toFixed(2);
     const currency = curr;
+    const standard_pay = Number(salary*0.3).toFixed(2);
+    const overtime_pay = Number(salary*0.1).toFixed(2);
+    const holiday_pay = Number(salary*0.2).toFixed(2);
+    const basic_pay = Number(salary*0.35).toFixed(2);
+    const commision_pay = Number(salary*0.05).toFixed(2);
+    const standard_rate = (standard_pay/Number(hours*0.7)).toFixed(2);
+    const overtime_rate = (overtime_pay/Number(hours*0.025)).toFixed(2);
+    const holiday_rate = (holiday_pay/Number(hours*0.025)).toFixed(2);
+    const basic_rate = (basic_pay/Number(hours*0.2)).toFixed(2);
+    const commision_rate = (commision_pay/Number(hours*0.05)).toFixed(2);
     return(
     <div>
       <Container className='mt-5'> 
@@ -145,41 +155,41 @@ function EmployeeDashboard() {
                       <th>Standard Pay</th>
                       <th>{hours*0.7}</th>
                       <th>{currency}</th>
-                      <th>{(salary*0.3)/(hours*0.7)}</th>
-                      <th>{salary*0.3}</th>
-                      <th>{salary*0.3}</th>
+                      <th>{standard_rate}</th>
+                      <th>{standard_pay}</th>
+                      <th>{standard_pay}</th>
                   </tr>
                   <tr>
                       <th>Overtime Pay</th>
                       <th>{hours*0.025}</th>
                       <th>{currency}</th>
-                      <th>{(salary*0.1)/(hours*0.025)}</th>
-                      <th>{salary*0.1}</th>
-                      <th>{salary*0.1}</th>
+                      <th>{(overtime_rate)}</th>
+                      <th>{overtime_pay}</th>
+                      <th>{overtime_pay}</th>
                   </tr>
                   <tr>
                       <th>Holiday Pay</th>
                       <th>{hours*0.025}</th>
                       <th>{currency}</th>
-                      <th>{(salary*0.2)/(hours*0.025)}</th>
-                      <th>{salary*0.2}</th>
-                      <th>{salary*0.2}</th>
+                      <th>{holiday_rate}</th>
+                      <th>{holiday_pay}</th>
+                      <th>{holiday_pay}</th>
                   </tr>
                   <tr>
                       <th>Basic Pay</th>
                       <th>{hours*0.2}</th>
                       <th>{currency}</th>
-                      <th>{(salary*0.35)/(hours*0.2)}</th>
-                      <th>{salary*0.35}</th>
-                      <th>{salary*0.35}</th>
+                      <th>{basic_rate}</th>
+                      <th>{basic_pay}</th>
+                      <th>{basic_pay}</th>
                   </tr>
                   <tr>
                       <th>Commision and Bonus</th>
                       <th>{hours*0.05}</th>
                       <th>{currency}</th>
-                      <th>{(salary*0.05)/(hours*0.05)}</th>
-                      <th>{salary*0.05}</th>
-                      <th>{salary*0.05}</th>
+                      <th>{commision_rate}</th>
+                      <th>{commision_pay}</th>
+                      <th>{commision_pay}</th>
                   </tr>
                   <tr>
                       <th>Gross Pay</th>
