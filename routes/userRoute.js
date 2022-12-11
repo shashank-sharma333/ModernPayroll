@@ -82,7 +82,7 @@ router.post("/getDetailsByEmail", async(req, res) => {
 router.get("/getallusers", async(req, res) => {
 
     try {
-        const users = await User.find({})
+        const users = await User.find({role: "employee"})
         res.send(users)
     } catch (error) {
         return res.status(400).json({ message: error });
