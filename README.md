@@ -20,4 +20,4 @@ Steps for running the project:-
 This will start backend node.js server		
 
 # System Architecture Diagram 
-![Modern Payroll]()
+![Modern Payroll](https://github.com/shashank-sharma333/ModernPayroll/blob/master/client/public/ModernPayrollArchitectureDiagram.png)
