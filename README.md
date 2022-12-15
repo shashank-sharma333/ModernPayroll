@@ -18,3 +18,6 @@ Steps for running the project:-
 2) On parent folder, containing server.js, run 
 		 i) npm run server
 This will start backend node.js server		
+
+# System Architecture Diagram 
+![Modern Payroll]()
