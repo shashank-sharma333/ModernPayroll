@@ -1,4 +1,5 @@
-#Introduction to ModernPayroll
+# Introduction to ModernPayroll
+
 Current payroll systems facilitate the transfer of money between the employer and the employee in specific currency only. 
 With an increase in remote work culture, there is a need for making a universal payment mechanism, irrespective of the currency. 
 Our goal is to build a payroll system that pays the employees in cryptocurrency 
