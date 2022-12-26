@@ -11,8 +11,9 @@ Instant global transfers of cryptocurrency hold an edge over legacy bank transfe
 
 Requiremements:
 
-Metamask: https://chrome.google.com/webstore/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn
-Test Ethers: https://sepolia-faucet.pk910.de/
+* Metamask: https://chrome.google.com/webstore/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn
+
+* Test Ethers: https://sepolia-faucet.pk910.de/
 
 Steps for running the project:-
 
