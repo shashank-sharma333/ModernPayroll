@@ -9,6 +9,11 @@ Instant global transfers of cryptocurrency hold an edge over legacy bank transfe
 
 # ModernPayroll
 
+Requiremements:
+
+Metamask: https://chrome.google.com/webstore/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn
+Test Ethers: https://sepolia-faucet.pk910.de/
+
 Steps for running the project:-
 
 1) Migrate to client folder and run
